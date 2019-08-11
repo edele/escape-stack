@@ -73,6 +73,8 @@ function ImagePopup({ url, alt, onClose }: ImagePopupProps) {
 // ************** //
 
 // TODO: fix bug if hook is used outside of target
+// TODO: move to context?
+// TODO: does it make sense to use several instances via different context providers?
 
 const globalEscapeListenersStack = [];
 const namesStack = [];

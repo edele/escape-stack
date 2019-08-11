@@ -1,13 +1,16 @@
 // @flow
 
 import * as React from "react";
+import { EscProvider, EscContext } from "./ClassesEscContext";
 
 export default function App() {
   return (
     <div>
-      <Accordion>
-        <Card />
-      </Accordion>
+      <EscProvider>
+        <Accordion>
+          <Card />
+        </Accordion>
+      </EscProvider>
     </div>
   );
 }
@@ -16,6 +19,20 @@ class Accordion extends React.Component<
   { children: React.Node },
   { isOpen: boolean }
 > {
+  static contextType = EscContext;
+
+  onEscape = () => {
+    this.setState({ isOpen: false });
+  };
+
+  componentDidMount() {
+    this.context.addListener(this.onEscape);
+  }
+
+  componentWillUnmount() {
+    this.context.removeListener(this.onEscape);
+  }
+
   state = { isOpen: false };
 
   render() {
@@ -76,6 +93,20 @@ class Card extends React.Component<{}, { selected: null | string }> {
 type ImagePopupProps = { url: string, alt: string, onClose: () => void };
 
 class ImagePopup extends React.Component<ImagePopupProps> {
+  static contextType = EscContext;
+
+  onEscape = () => {
+    this.props.onClose();
+  };
+
+  componentDidMount() {
+    this.context.addListener(this.onEscape);
+  }
+
+  componentWillUnmount() {
+    this.context.removeListener(this.onEscape);
+  }
+
   render() {
     const { url, alt, onClose } = this.props;
 
