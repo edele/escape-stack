@@ -12,15 +12,24 @@ export default function App() {
   );
 }
 
-function Accordion({ children }) {
-  const [isOpen, setOpen] = React.useState(false);
+class Accordion extends React.Component<
+  { children: React.Node },
+  { isOpen: boolean }
+> {
+  state = { isOpen: false };
 
-  return (
-    <div style={{ background: "violet" }}>
-      <button onClick={() => setOpen(x => !x)}>uncollapse or collapse</button>
-      {isOpen && <div>{children}</div>}
-    </div>
-  );
+  render() {
+    return (
+      <div style={{ background: "violet" }}>
+        <button
+          onClick={() => this.setState(({ isOpen }) => ({ isOpen: !isOpen }))}
+        >
+          uncollapse or collapse
+        </button>
+        {this.state.isOpen && <div>{this.props.children}</div>}
+      </div>
+    );
+  }
 }
 
 class Card extends React.Component<{}, { selected: null | string }> {
