@@ -3,9 +3,9 @@
 import * as React from "react";
 
 export default function App() {
-  console.log("hooks variant");
   return (
     <div>
+      hooks variant
       <Accordion>
         <Card />
       </Accordion>

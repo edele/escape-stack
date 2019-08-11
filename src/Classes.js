@@ -4,9 +4,9 @@ import * as React from "react";
 import { EscProvider, EscContext } from "./ClassesEscContext";
 
 export default function App() {
-  console.log("classes variant");
   return (
     <div>
+      classes variant
       <EscProvider>
         <Accordion>
           <Card />
