@@ -2,11 +2,16 @@
 
 import * as React from "react";
 import ReactDOM from "react-dom";
-import App from "./Classes";
+import Classes from "./Classes";
+import Hooks from "./Hooks";
 import "./css.css";
 
 const element = document.getElementById("root");
 
 if (element) {
-  ReactDOM.render(<App />, element);
+  ReactDOM.render(<Router />, element);
+}
+
+function Router() {
+  return <>{window.location.hash === "#classes" ? <Classes /> : <Hooks />}</>;
 }
